@@ -1,11 +1,9 @@
+CC=gcc
+CFLAGS=-Wall -Werror -Wextra -pedantic -O2
+
 all:
-	gcc main_fcfs.c -o main_fcfs -Wall -Werror -Wextra -pedantic -O2
-	cat data.txt | ./main_fcfs
-	rm main_fcfs
-
-bin:
-	gcc main_fcfs.c -o main_fcfs -Wall -Werror -Wextra -pedantic -O2
-
+	$(CC) main_fcfs.c process.c -o fcfs $(CFLAGS)
+	$(CC) main_sjf.c process.c -o sjf $(CFLAGS)
 
 clean:
-	rm main_fcfs
+	rm fcfs sjf
