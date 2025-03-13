@@ -59,11 +59,22 @@ void display_process_table(int **arr, int pnums) {
 			printf("|%d\t", arr[i][j]);
 		}	putchar('\n');
 	}	putchar('\n');
+	float avg_wt = 0, avg_tat = 0;
+	for(int i = 0; i < pnums; i++) {
+		avg_wt += arr[i][5];
+		avg_tat += arr[i][4];
+	}
+	avg_wt /= (float) pnums;
+	avg_tat /= (float) pnums;
+	printf("Average waiting time : %0.4f\n", avg_wt);
+	printf("Average turnaround time : %0.4f\n", avg_tat);
+
 }
 
-void calculate_params(int **arr, int pnums) {
-	int time = 0;
+int calculate_params(int **arr, int pnums, int time_par) {
+	int time = time_par;
 	for(int i = 0; i < pnums; i++) {
+		if(arr[i][3] != 0) {continue ;}
 		time = arr[i][1] > time ? arr[i][1] : time;
 
 		/* CT = Time + BT */
@@ -78,6 +89,7 @@ void calculate_params(int **arr, int pnums) {
 
 		time = arr[i][3];
 	}
+	return time_par;
 }
 
 void free_table(int **arr, int pnums) {

@@ -23,7 +23,7 @@ void sort_index(int **arr, int pnums, int index);
 
 void display_process_table(int **arr, int pnums);
 
-void calculate_params(int **arr, int pnums);
+void calculate_params(int **arr, int pnums, int time_par);
 
 void free_table(int **arr, int pnums);
 
