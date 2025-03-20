@@ -4,6 +4,7 @@ CFLAGS=-Wall -Werror -Wextra -pedantic -O2 -Werror
 all:
 	$(CC) main_fcfs.c process.c -o fcfs $(CFLAGS)
 	$(CC) main_sjf.c process.c -o sjf $(CFLAGS)
+	$(CC) main_sjf_preempt.c process.c -o sjf_preempt $(CFLAGS)
 	$(CC) main_pr.c process.c -o pr $(CFLAGS)
 	$(CC) main_pr_preempt.c process.c -o pr_preempt $(CFLAGS)
 	$(CC) main_rr.c process.c -o rr $(CFLAGS)
@@ -12,6 +13,8 @@ all:
 	cat ./data_fcfs.txt | ./fcfs
 	echo "\nShortest Job First :"
 	cat ./data_sjf.txt | ./sjf
+	echo "\nPreemptive Shortest Job First :"
+	cat ./data_sjf.txt | ./sjf_preempt
 	echo "\nPriority Scheduling :"
 	cat ./data_pr.txt | ./pr
 	echo "\nPreemptive Priority Scheduling : "
