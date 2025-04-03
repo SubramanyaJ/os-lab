@@ -1,6 +1,18 @@
-all:
-	@gcc main_multilevel.c queue.c -o main_multilevel.out
-	@./main_multilevel.out
+CC = gcc
+CFLAGS = -O2
+TARGET = main_multilevel.out
+SRC = main_multilevel.c queue.c
+HEADERS = queue.h
+
+all: $(TARGET)
+
+$(TARGET): $(SRC) $(HEADERS)
+	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)
 
 clean:
-	@rm main_multilevel.out
+	rm -f $(TARGET)
+
+.PHONY: all run clean
