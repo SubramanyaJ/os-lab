@@ -5,6 +5,7 @@
 struct Queue {
 	void **arr;
 	int capacity;
+	int items;
 	int front, back;
 };
 
@@ -25,5 +26,7 @@ void* backof_queue(struct Queue *queue);
 void* frontof_queue(struct Queue *queue);
 
 void free_queue(struct Queue *queue);
+
+int itemsin_queue(struct Queue *queue);
 
 #endif /* queue.h included */

@@ -1,5 +1,5 @@
 all:
-	@gcc main_multilevel.c -o main_multilevel.out -O2 -Wall -Werror -Wextra
+	@gcc main_multilevel.c queue.c -o main_multilevel.out
 	@./main_multilevel.out
 
 clean:
