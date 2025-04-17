@@ -55,6 +55,7 @@ main() {
 	int n;
 	struct Process *arr = get_processes(&n);
 	qsort(arr, n, sizeof(struct Process), proccmp);
+	putchar('\n');
 
 	monotonic_scheduler(arr, n);
 

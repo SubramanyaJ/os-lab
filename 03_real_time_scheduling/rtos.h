@@ -10,6 +10,8 @@ struct Process {
 	int ival;
 	int rem_bt;
 	int next_release;
+	int deadline;
+	int weight;
 	bool rtr;
 };
 
