@@ -1,46 +1,46 @@
-#include <stdio.h>
+#include "page_replacement.h"
 
 int main() {
-	int frames, pages, i, j, k, pageFaults = 0, min;
-	printf("Enter number of frames: ");
-	scanf("%d", &frames);
-	printf("Enter number of pages: ");
-	scanf("%d", &pages);
-	int referenceString[pages], frame[frames], counter[frames];
-	printf("Enter reference string: ");
-	for (i = 0; i < pages; i++) {
-		scanf("%d", &referenceString[i]);
-	}
-	for (i = 0; i < frames; i++) {
+	int frames, pages, pageFaults = 0;
+	int referenceString[100], frame[100]; // Max size to prevent runtime issues
+
+	GET_INPUT(frames, pages, referenceString);
+
+	// Initialize frames
+	for (int i = 0; i < frames; i++) {
 		frame[i] = -1;
-		counter[i] = 0;
 	}
-	for (i = 0; i < pages; i++) {
+
+	for (int i = 0; i < pages; i++) {
 		int found = 0;
-		for (j = 0; j < frames; j++) {
+		for (int j = 0; j < frames; j++) {
 			if (frame[j] == referenceString[i]) {
 				found = 1;
-				counter[j] = i + 1;
 				break;
 			}
 		}
+
 		if (!found) {
-			min = 0;
-			for (j = 1; j < frames; j++) {
-				if (counter[j] < counter[min]) {
-					min = j;
+			int max = -1, index = -1;
+			for (int j = 0; j < frames; j++) {
+				if (frame[j] == -1) { index = j; break; }
+
+				int next = 0;
+				for (int k = i + 1; k < pages; k++) {
+					if (frame[j] == referenceString[k]) { next = k; break; }
 				}
+
+				if (next == 0) { index = j; break; }
+				if (next > max) { max = next; index = j; }
 			}
-			frame[min] = referenceString[i];
-			counter[min] = i + 1;
+
+			frame[index] = referenceString[i];
 			pageFaults++;
 		}
-		printf("%d: ", referenceString[i]);
-		for (k = 0; k < frames; k++) {
-			printf("%d ", frame[k]);
-		}
-		printf("\n");
+
+		DISPLAY_FRAMES(referenceString[i], frames, frame);
 	}
-	printf("Total Page Faults: %d\n", pageFaults);
+
+	PRINT_PAGE_FAULTS(pageFaults);
 	return 0;
 }
